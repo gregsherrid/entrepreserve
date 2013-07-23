@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module UserApp
+module Tester
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -21,3 +21,6 @@ module UserApp
     # config.i18n.default_locale = :de
   end
 end
+
+#Added from http://stackoverflow.com/questions/5713026/how-to-make-a-global-function-for-rails-3
+Dir.glob("./lib/*.{rb}").each { |file| require file } # require each file from lib directory
