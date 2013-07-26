@@ -23,4 +23,5 @@ module Tester
 end
 
 #Added from http://stackoverflow.com/questions/5713026/how-to-make-a-global-function-for-rails-3
+#Import from lib all ruby files
 Dir.glob("./lib/*.{rb}").each { |file| require file } # require each file from lib directory

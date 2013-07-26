@@ -1,0 +1,12 @@
+<% provide( :title, 'Edit Profile' ) %>
+
+<section>
+	<h1>Sign Up</h1>
+
+	<%= form_for( @user ) do |f| %>
+		<%= render 'users/fields', f: f %>
+
+		<%= f.submit "Submit Changes" %>
+		
+	<% end %>
+</section>

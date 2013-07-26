@@ -1,0 +1,20 @@
+<section id="loginArea">
+
+	<% if signed_in? %>
+
+		<p>
+			<%= current_user.full_name %>
+			<%= link_to "Sign Out", signout_path, method: "delete", id: "signout" %>
+		</p>
+
+	<% else %>
+
+		<%= form_tag sessions_path do %>
+
+			<%= text_field_tag :username, '', placeholder: "username" %>
+			<%= password_field_tag :password, '', placeholder: "password" %>
+			<%= submit_tag 'Log In', id: "signin" %>
+		<% end %>
+
+	<% end %>
+</section>

@@ -1,0 +1,44 @@
+<section id="notifications">
+
+	<% alerts = [] %>
+	<% if flash[:notice] %>
+		<% alerts.push( flash[:notice] ) %>
+	<% end %>
+	<% if flash[:alert] %>
+		<% alerts.push( flash[:alert] ) %>
+	<% end %>
+
+	<% errors = [] %>
+	<% if flash[:error] %>
+		<% errors << flash[:error] %>
+	<% end %>
+	<% yield(:form_errors) %>
+	<% unless @form_errors.nil? %>
+		<% errors = ( errors << @form_errors ).flatten %>
+	<% end %>
+
+	<div id="javascriptWarning">
+		<p>This site functions best with javascript enabled!</p>
+	</div>
+
+	<% unless alerts.empty? %>
+		<div id="alerts">
+			<% alerts.each do |alert| %>
+				<p><%= alert %></p>
+			<% end %>
+		</div>
+	<% end %>
+
+	<% unless errors.empty? %>
+		<div id="errors">
+			<h3>Errors</h3>
+
+			<ul>
+				<% errors.each do |error| %>
+					<li><%= error %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+</section>

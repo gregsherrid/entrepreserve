@@ -1,0 +1,5 @@
+<% if object.errors.any? %>
+	<% content_for :form_errors do %>
+		<% @form_errors = object.errors.full_messages %>
+	<% end %>
+<% end %>

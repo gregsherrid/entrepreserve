@@ -32,6 +32,13 @@ Spork.prefork do
     # instead of true.
     config.use_transactional_fixtures = true
 
+    module ::RSpec::Code
+      class ExampleGroup
+        include Capybara::DSL
+        include Capybara::RSpecMatchers
+      end
+    end
+    
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
