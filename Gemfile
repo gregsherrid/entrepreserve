@@ -24,6 +24,7 @@ group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'launchy'
+  gem 'letter_opener', :group => :development
 end
 
 group :development do

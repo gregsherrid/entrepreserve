@@ -4,6 +4,8 @@
 	<h1>Sign Up</h1>
 
 	<%= form_for( @user ) do |f| %>
+		<%= link_to "Change Password", change_password_user_path(@user) %>
+		<br>
 		<%= render 'users/fields', f: f %>
 
 		<%= f.submit "Submit Changes" %>

@@ -59,6 +59,35 @@ describe "UserPages" do
 			has_no_error
 			user.reload.username.should == other_user.username + "est"
 		end
+
+		let(:new_pwd) { "foobar2" }
+		let!(:old_pwd) { user.password }
+		it "| Change password" do
+			visit change_password_user_path( user )
+
+			def testPasswords( old_p, new_p, rep_p, passes=false )
+				fill_in "Old password", with: old_p
+				fill_in "New password", with: new_p
+				fill_in "Repeat new password", with: rep_p
+				click_button "Change Password"
+				user.reload
+
+				if passes
+					has_no_error
+					user.authenticate( old_pwd ).should == false
+					user.authenticate( new_pwd ).should == user
+				else
+					has_error
+					user.authenticate( old_pwd ).should == user
+					user.authenticate( new_pwd ).should == false
+				end
+			end
+
+			testPasswords( old_pwd, "", "" )
+			testPasswords( "", new_pwd, new_pwd )
+			testPasswords( old_pwd, new_pwd, new_pwd + "x" )
+			testPasswords( old_pwd, new_pwd, new_pwd, true )
+		end
 	end
 
 	before(:all) { DatabaseCleaner.strategy = :truncation }

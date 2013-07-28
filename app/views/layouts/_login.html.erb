@@ -14,6 +14,7 @@
 			<%= text_field_tag :username, '', placeholder: "username" %>
 			<%= password_field_tag :password, '', placeholder: "password" %>
 			<%= submit_tag 'Log In', id: "signin" %>
+			<%= link_to "Forgot?", password_reset_sessions_path %></p>
 		<% end %>
 
 	<% end %>

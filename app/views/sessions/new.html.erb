@@ -12,7 +12,7 @@
 		<%= password_field_tag :password, '', id: "passwordPrime" %>
 		<br>
 		<%= submit_tag 'Sign In', id:"signinPrime" %>
-		<a href='#'>Forgot?</a>
+		<%= link_to "Forgot?", request_reset_sessions_path %></p>
 	<% end %>
 
 </section>

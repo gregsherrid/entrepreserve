@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+	prepend_before_action :unsigned_in_user,
+		only: [ :new, :create ]
+
 	def new
 	end
 	
@@ -10,7 +13,7 @@ class SessionsController < ApplicationController
 			sign_in user
 			redirect_to user
 		else
-			flash[:error] = 'Invalid username/password'
+			flash.now[:error] = 'Invalid username/password'
 			render "new"
 		end
 	end
@@ -18,6 +21,20 @@ class SessionsController < ApplicationController
 	def destroy
 		sign_out
 		redirect_to root_url
+	end
+
+	def password_reset
+		sign_out
+	end
+
+	def request_reset
+		sign_out
+		user  = User.find_by( email: params[:email] )
+		if user
+			raise "not yet"
+		end
+		flash[:notice] = "Email send with password reset instructions."
+		redirect_to
 	end
 	
 end

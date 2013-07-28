@@ -35,3 +35,9 @@ def has_error( flag=true )
 	should_not have_selector( "div#errors" ) if !flag
 end
 def has_no_error() has_error(false) end
+
+def is_home( flag = true )
+	should 	   have_selector( 'section#homePage' ) if flag
+	should_not have_selector( 'section#homePage' ) if !flag
+end
+def is_not_home() is_home( false ) end

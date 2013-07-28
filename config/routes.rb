@@ -3,11 +3,22 @@ Tester::Application.routes.draw do
 
   root to: "static_pages#home"
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy] do
+    collection do
+      get 'password_reset'
+      post 'request_reset'
+    end
+  end
+
   get '/signin' => "sessions#new"
   delete '/signout' => "sessions#destroy"
 
-  resources :users
+  resources :users do
+    member do
+      get 'change_password'
+      patch 'update_password'
+    end
+  end
   get '/signup' => "users#new"
 
   # The priority is based upon order of creation: first created -> highest priority.
