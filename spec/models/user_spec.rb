@@ -13,6 +13,7 @@
 #  remember_token       :string(255)
 #  password_reset_token :string(255)
 #  password_reset_at    :datetime
+#  is_admin             :boolean
 #
 
 require 'spec_helper'

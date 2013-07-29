@@ -13,6 +13,7 @@
 #  remember_token       :string(255)
 #  password_reset_token :string(255)
 #  password_reset_at    :datetime
+#  is_admin             :boolean
 #
 
 class User < ActiveRecord::Base
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
 	before_save do
 		username.downcase! unless username.nil?
 		email.downcase! unless email.nil?
+		is_admin = !!is_admin
 		generate_token(:remember_token)
 	end
 

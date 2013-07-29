@@ -8,6 +8,10 @@ module SessionsHelper
 	def unsigned_in_user
 		auth_redirect if signed_in?
 	end
+	
+	def is_admin
+		auth_redirect unless current_user.is_admin
+	end
 
 	def no_access
 		auth_redirect

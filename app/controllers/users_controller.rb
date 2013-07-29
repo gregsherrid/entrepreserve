@@ -15,6 +15,9 @@ class UsersController < ApplicationController
 	before_action :allow_password_change,
 		only: [ :change_password, :update_password ]
 
+	before_action :is_admin,
+		only: [ :index, :destroy ]
+
 	def show
 	end
 

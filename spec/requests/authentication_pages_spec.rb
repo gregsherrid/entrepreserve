@@ -38,8 +38,9 @@ describe "AuthenticationPages" do
 	end
 
 	describe "| Net" do
-		let(:user1) { FactoryGirl.create(:user) }
-		let(:user2) { FactoryGirl.create(:user) }
+		let!(:user1) { FactoryGirl.create(:user) }
+		let!(:user2) { FactoryGirl.create(:user) }
+		let!(:admin) { FactoryGirl.create(:admin) }
 
 		def base_restrictions( c_user )
 
@@ -67,6 +68,9 @@ describe "AuthenticationPages" do
 			can_patch 		update_password_user_path( user1 ),
 									user_is_user, false
 
+			#Only admins can do this
+			user_is_admin = c_user == admin
+			can_view 		users_path,			user_is_admin
 		end
 
 		describe "| When signed in as" do
@@ -77,6 +81,7 @@ describe "AuthenticationPages" do
 
 			it "| No one"	do base_restrictions( nil )   end
 			it "| A user"	do run_bar( user1 ) 		  end
+			it "| An admin"	do run_bar( admin ) 		  end
 		end
 	end
 
