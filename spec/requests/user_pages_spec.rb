@@ -104,7 +104,7 @@ describe "UserPages" do
 		new_pwd = "newPassword"
 
 		visit password_reset_sessions_path
-		fill_in "Email", with: user.email
+		fill_in "retrieveEmail", with: user.email
 		click_button "Get new password"
 
 		email = ActionMailer::Base.deliveries.last.to_s

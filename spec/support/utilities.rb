@@ -1,7 +1,7 @@
 def sign_in(user, pwd=nil )
 	password = pwd ? pwd : user.password
 	visit root_path
-	fill_in "username", with: user.username
+	fill_in "email", with: user.email
 	fill_in "password", with: password
 	click_button "Log In"
 	# Sign in when not using Capybara as well.

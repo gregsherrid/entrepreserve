@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe UserMailer do
+=begin
   describe "password_reset" do
     let(:mail) { UserMailer.password_reset }
 
@@ -14,5 +15,5 @@ describe UserMailer do
       mail.body.encoded.should match("Hi")
     end
   end
-
+=end
 end

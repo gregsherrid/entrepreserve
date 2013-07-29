@@ -11,7 +11,7 @@
 
 		<%= form_tag sessions_path do %>
 
-			<%= text_field_tag :username, '', placeholder: "username" %>
+			<%= text_field_tag :email, '', placeholder: "email" %>
 			<%= password_field_tag :password, '', placeholder: "password" %>
 			<%= submit_tag 'Log In', id: "signin" %>
 			<%= link_to "Forgot?", password_reset_sessions_path %></p>

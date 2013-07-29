@@ -16,7 +16,7 @@ describe "AuthenticationPages" do
 			#has_error
 			is_signed_out
 
-			fill_in "usernamePrime", with: user.username
+			fill_in "emailPrime", with: user.email
 			fill_in "passwordPrime", with: user.password
 			click_button "signinPrime"
 
