@@ -29,12 +29,12 @@ class SessionsController < ApplicationController
 
 	def request_reset
 		sign_out
-		user  = User.find_by( email: params[:email] )
-		if user
-			raise "not yet"
-		end
-		flash[:notice] = "Email send with password reset instructions."
-		redirect_to
+
+		user = User.find_by( email: params[:email] )
+		user.prep_password_reset unless user.nil?
+
+		flash[:notice] = "Email sent with password reset instructions."
+		redirect_to root_path
 	end
 	
 end

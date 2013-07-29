@@ -1,14 +1,16 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+    default from: "no-reply@example.com"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.password_reset.subject
-  #
-  def password_reset
-    @greeting = "Hi"
+    def welcome( user )
+        @recipient = user
+        subject = "Welcome to our site!"
+        mail( to: user.email, from: "welcome@example.com", subject: subject )
+    end
 
-    mail to: "to@example.org"
-  end
+    def password_reset( user )
+        @recipient = user
+        @link = change_password_user_url( user, token: user.password_reset_token )
+        subject = "Password Reset"
+        mail( to: user.email, from: "support@example.com", subject: subject )
+    end
 end

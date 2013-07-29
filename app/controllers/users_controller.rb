@@ -4,13 +4,16 @@ class UsersController < ApplicationController
 		except: [:new, :create, :index]
 
 	prepend_before_action :signed_in_user,
-		except: [:new, :create ]
+		except: [:new, :create, :change_password, :update_password ]
 
 	prepend_before_action :unsigned_in_user,
 		only: [ :new, :create ]
 
 	before_action :is_current_user,
-		only: [ :edit, :update, :change_password, :update_password ]
+		only: [ :edit, :update ]
+
+	before_action :allow_password_change,
+		only: [ :change_password, :update_password ]
 
 	def show
 	end
@@ -26,6 +29,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new( user_params )
 		if @user.save
+			UserMailer.welcome( @user ).deliver
 			sign_in @user
 			redirect_to @user
 		else
@@ -50,11 +54,14 @@ class UsersController < ApplicationController
 	end
 
 	def change_password
+		#@is_password_reset set before_action
 	end
 
 	def update_password
+		#@is_password_reset set before_action
 		can_change = true
-		if @user.authenticate( params[:old_password] ) != @user
+		if !@is_password_reset &&
+		   @user.authenticate( params[:old_password] ) != @user
 			flash.now[:error] = "Existing password is incorrect"
 			can_change = false
 		elsif params[:new_password].blank?
@@ -73,7 +80,12 @@ class UsersController < ApplicationController
 		if can_change
 			@user.save
 			flash[:notice] = "Password Changed!"
-			render 'show'
+			if @is_password_reset
+				redirect_to root_path
+			else
+				sign_in @user
+				render 'show'
+			end
 		else
 			render 'change_password'
 		end
@@ -91,7 +103,24 @@ class UsersController < ApplicationController
 		end
 
 		def is_current_user
-			redirect_to root_path unless @user == current_user
+			auth_redirect unless @user == current_user
+		end
+
+		def allow_password_change
+			@token = params[:token]
+			@is_password_reset = !@token.nil?
+
+			return if @user == current_user
+			
+			if @user.password_reset_token.nil? || @user.password_reset_at.nil?
+				auth_redirect
+			elsif @user.password_reset_token != @token
+				auth_redirect
+			elsif @user.password_reset_at < 2.hours.ago
+				flash[:notice] = "Password reset has expired."
+				redirect_to password_reset_sessions_path
+			end
+			#proceed
 		end
 
 end

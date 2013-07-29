@@ -2,17 +2,21 @@ module SessionsHelper
 
 	#Methods for redirecting users
 	def signed_in_user
-		redirect_to root_path unless signed_in?
+		auth_redirect unless signed_in?
 	end
 
 	def unsigned_in_user
-		redirect_to root_path if signed_in?
+		auth_redirect if signed_in?
 	end
 
 	def no_access
-		redirect_to root_path
+		auth_redirect
 	end
 
+	def auth_redirect
+		flash[:error] = "Permission Denied"
+		redirect_to root_path
+	end
 
 	###########################################################
 	######### Methods for signing in, signing out, ############

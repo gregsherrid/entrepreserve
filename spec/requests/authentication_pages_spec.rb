@@ -88,7 +88,7 @@ describe "AuthenticationPages" do
 	def can_view( path, flag=true )
 		path = polymorphic_path( path ) if path.class.name != "String"
 		visit path
-		flag ? is_not_home : is_home
+		is_auth_redirect( !flag )
 	end
 	def cannot_view( path ) can_view( path, false ) end
 
@@ -114,7 +114,7 @@ describe "AuthenticationPages" do
 			expect { patch path }.not_to raise_error if !flag
 		else
 			patch path
-			flag ? is_not_home : is_home
+			is_auth_redirect( !flag )
 		end
 	end	
 	def cannot_patch( path ) can_patch( patch, false ) end

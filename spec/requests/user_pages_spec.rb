@@ -40,6 +40,8 @@ describe "UserPages" do
 	describe "| User pages" do
 		let!(:user) { FactoryGirl.create(:user) }
 
+		before { sign_in user }
+
 		it "| Profile page" do
 			visit user_path( user )
 			should have_content user.username
@@ -60,7 +62,7 @@ describe "UserPages" do
 			user.reload.username.should == other_user.username + "est"
 		end
 
-		let(:new_pwd) { "foobar2" }
+		let(:new_pwd) { "newPassword" }
 		let!(:old_pwd) { user.password }
 		it "| Change password" do
 			visit change_password_user_path( user )
@@ -87,7 +89,49 @@ describe "UserPages" do
 			testPasswords( "", new_pwd, new_pwd )
 			testPasswords( old_pwd, new_pwd, new_pwd + "x" )
 			testPasswords( old_pwd, new_pwd, new_pwd, true )
+
+			sign_out
+			sign_in( user, old_pwd )
+			is_signed_out
+			sign_in( user, new_pwd )
+			is_signed_in
 		end
+	end
+
+	it "| Retrieve password" do
+		user = FactoryGirl.create(:user)
+		old_pwd = user.password
+		new_pwd = "newPassword"
+
+		visit password_reset_sessions_path
+		fill_in "Email", with: user.email
+		click_button "Get new password"
+
+		email = ActionMailer::Base.deliveries.last.to_s
+		email.should include( "Subject: Password Reset" )
+		reset_link = grab_links( email )[0]
+		
+		#First, we can't see the password reset w/o link
+		visit change_password_user_path( user )
+		is_auth_redirect
+
+		visit reset_link
+		is_auth_redirect( false )
+
+		should_not have_selector( "input#old_password")
+		click_button "Change Password"
+		has_error
+
+		fill_in "New password", with: new_pwd
+		fill_in "Repeat new password", with: new_pwd
+		click_button "Change Password"
+
+		is_home
+		is_signed_out
+		sign_in( user, old_pwd )
+		is_signed_out
+		sign_in( user, new_pwd )
+		is_signed_in
 	end
 
 	before(:all) { DatabaseCleaner.strategy = :truncation }
