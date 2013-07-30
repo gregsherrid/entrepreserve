@@ -1,9 +1,36 @@
 <% provide( :title, 'User Profile' ) %>
 
 <section>
-	<h1>Profile Page</h1>
 
-	<h1><%= @user.full_name %></h1>
-	<p><%= @user.username %></p>
+	<div class="row">
+
+		<h1><%= current_user?(@user) ? "Your Profile" : "User Profile" %></h1>
+
+		<section class="span7">
+		</section>
+
+
+		<section class="span4 well" id="infoBox">
+			<h2>
+				Account Info
+				<%= link_to "edit", edit_user_path( @user ), class:"editLink" %>
+			</h2>
+			<table class="table">
+				<tr>
+					<td>Username</td>
+					<td><%= @user.username %></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><%= @user.full_name %></td>
+				</tr>
+				<tr>
+					<td>Account Created</td>
+					<td><%= as_date( @user.created_at ) %></td>
+				</tr>
+			</table>
+		</section>
+
+	</div>
 	
 </section>

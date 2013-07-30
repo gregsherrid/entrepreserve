@@ -1,25 +1,9 @@
-<% if signed_in? %>
+<%= form_tag sessions_path, id:"loginArea" do %>
 
-	<p>
-		<%= current_user.full_name %>
-		<%= link_to "Sign Out", signout_path, method: "delete", id: "signout" %>
-	</p>
+	<%= text_field_tag :email, '', placeholder: "email" %>
+	<%= password_field_tag :password, '', placeholder: "password" %>
 
-<% else %>
-
-	<li class="dropdown">
-		<%= dropdown_link "Sign In" %>
-		<div class="dropdown-menu" >
-			<%= form_tag sessions_path, id:"loginArea" do %>
-
-				<%= text_field_tag :email, '', placeholder: "email" %>
-				<%= password_field_tag :password, '', placeholder: "password" %>
-				<br>
-				<%= link_to "Sign up", signup_path %>
-				<%= submit_tag 'Log In', id: "signin", class: "btn btn-primary" %>
-				<%= link_to "Forgot?", password_reset_sessions_path, id: "forgot" %>
-			<% end %>
-     	</div>
-	</li>
-
+	<%= link_to "Sign up", signup_path %>
+	<%= submit_tag 'Log In', id: "signin", class: "btn btn-primary" %>
+	<%= link_to "Forgot?", password_reset_sessions_path, id: "forgot" %>
 <% end %>

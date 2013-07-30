@@ -15,9 +15,30 @@
 
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
  		<li><%= link_to "Downloads", "#" %></li>
-		<li><%= link_to "Purchase Kits", "#" %></li>
+		<li><%= link_to "Kits", "#" %></li>
 	</ul>
 </li>
 
 <li><%= link_to "Contact", contact_path %></li>
-<%= render 'layouts/login' %>
+
+<% if signed_in? %>
+
+	<li class="dropdown">
+		<%= dropdown_link current_user.username %>
+
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+ 			<li><%= link_to "Profile", user_path( current_user ) %></li>
+			<li><%= link_to "Edit Profile", edit_user_path( current_user ) %></li>
+			<li class="divider"></li>
+			<li><%= link_to "Sign Out", signout_path, method: "delete", id: "signout"  %></li>
+		</ul>
+	</li>
+
+<% else %>
+	<li class="dropdown">
+		<%= dropdown_link "Sign In" %>
+		<div class="dropdown-menu" >
+			<%= render 'layouts/login' %>
+		</div>
+	</li>
+<% end %>

@@ -10,4 +10,9 @@ module ApplicationHelper
 		end
 	end
 
+	def as_date( date )
+		date.strftime("%-b %-d, %Y")
+	end
+
+
 end
