@@ -1,0 +1,5 @@
+<h2>Recent Trees</h2>
+
+<% trees.take(n).each do |tree| %>
+	<p><%= link_to tree.title, tree %></p>
+<% end %>

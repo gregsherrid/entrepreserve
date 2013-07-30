@@ -13,4 +13,10 @@ FactoryGirl.define do
 			is_admin true
 		end
 	end
+
+	factory :tree do
+		sequence(:title) { |n| "Tree#{n}" }
+
+		association :owner, factory: :user
+	end
 end

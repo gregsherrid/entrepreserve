@@ -34,6 +34,8 @@ describe User do
 			should respond_to( :password_digest )
 			should respond_to( :password )
 			should respond_to( :password_confirmation )
+
+			should respond_to( :trees )
 		end
 
 		it { should be_valid }

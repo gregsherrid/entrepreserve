@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729194725) do
+ActiveRecord::Schema.define(version: 20130730164346) do
+
+  create_table "trees", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "trees", ["owner_id"], name: "index_trees_on_owner_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

@@ -1,0 +1,12 @@
+<% provide( :title, 'New Tree' ) %>
+
+<section>
+	<h1>New Tree</h1>
+
+	<%= form_for @tree do |f| %>
+		<%= render 'shared/error_messages', object: @tree %>
+		<%= f.label :title %>
+		<%= f.text_field :title, class:"span4" %>
+		<%= f.submit "Create Tree", class:"btn btn-primary btn-large ctr" %>		
+	<% end %>
+</section>

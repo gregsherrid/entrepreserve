@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
 		generate_token(:remember_token)
 	end
 
+	has_many :trees, foreign_key: "owner_id"
+
 	def full_name
 		first_name + " " + last_name
 	end

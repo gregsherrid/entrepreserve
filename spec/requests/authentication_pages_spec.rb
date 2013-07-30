@@ -39,6 +39,8 @@ describe "AuthenticationPages" do
 
 	describe "| Net" do
 		let!(:user1) { FactoryGirl.create(:user) }
+		let!(:tree1) { FactoryGirl.create(:tree, owner: user1 ) }
+
 		let!(:user2) { FactoryGirl.create(:user) }
 		let!(:admin) { FactoryGirl.create(:admin) }
 
@@ -47,18 +49,22 @@ describe "AuthenticationPages" do
 			#No one can do these
 
 			#All users can do this
+			can_view 		contact_path
+			can_view 		tree1
 
 			#signed-out users only
 			user_is_signed_out = c_user.nil?
 			can_view 		new_user_path,		user_is_signed_out
 			can_create 		users_path,			user_is_signed_out
 			can_view 		new_session_path, 	user_is_signed_out
-			can_create		sessions_path, 	user_is_signed_out
+			can_create		sessions_path, 		user_is_signed_out
 
 			#all signed-in users
 			user_is_signed_in = !c_user.nil?
 			can_view 		user1,				user_is_signed_in
 			can_view 		user2,				user_is_signed_in
+			can_create 		new_tree_path,		user_is_signed_in
+			can_create 		trees_path,			user_is_signed_in
 
 			#is this particular user only
 			user_is_user = c_user == user1
@@ -67,10 +73,15 @@ describe "AuthenticationPages" do
 												user_is_user
 			can_patch 		update_password_user_path( user1 ),
 									user_is_user, false
+			can_alter		tree1,				user_is_user
 
 			#Only admins can do this
 			user_is_admin = c_user == admin
 			can_view 		users_path,			user_is_admin
+
+			#can_delete		tree1,				user_is_user_or_admin
+			#can_delete		user1,				user_is_admin
+
 		end
 
 		describe "| When signed in as" do

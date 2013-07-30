@@ -2,11 +2,12 @@
 
 <section>
 
-	<div class="row">
+	<h1><%= current_user?(@user) ? "Your Profile" : "User Profile" %></h1>
+	<div class="row-fluid">
 
-		<h1><%= current_user?(@user) ? "Your Profile" : "User Profile" %></h1>
-
-		<section class="span7">
+		<section class="span8 text-center">
+			<%= render 'shared/recent_trees', trees: @user.trees, n: 4 %>
+			<%= link_to "Create a new Tree", new_tree_path, class:"btn btn-primary" %>
 		</section>
 
 
