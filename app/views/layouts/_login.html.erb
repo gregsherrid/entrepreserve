@@ -15,8 +15,9 @@
 				<%= text_field_tag :email, '', placeholder: "email" %>
 				<%= password_field_tag :password, '', placeholder: "password" %>
 				<br>
+				<%= link_to "Sign up", signup_path %>
 				<%= submit_tag 'Log In', id: "signin", class: "btn btn-primary" %>
-				<%= link_to "Forgot?", password_reset_sessions_path, id: "forgot" %></p>
+				<%= link_to "Forgot?", password_reset_sessions_path, id: "forgot" %>
 			<% end %>
      	</div>
 	</li>

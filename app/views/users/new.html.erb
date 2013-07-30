@@ -3,10 +3,10 @@
 <section>
 	<h1>Sign Up</h1>
 
-	<%= form_for( @user ) do |f| %>
+	<%= form_for @user, html: { class:"span8 ctr" } do |f| %>
 		<%= render 'users/fields', f: f %>
-
-		<%= f.submit "Create Account" %>
+		<br>
+		<%= f.submit "Create Account", class:"btn btn-primary btn-large ctr" %>
 		
 	<% end %>
 </section>
