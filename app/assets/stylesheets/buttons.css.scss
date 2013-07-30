@@ -1,3 +1,5 @@
+
+
 /*
 @import "bootstrap";
 
@@ -30,5 +32,9 @@
 	@include btn-custom( #dab8b8, #a45454 );
 	height: auto;
 	padding: 8px;
+}
+
+.btn.larger {
+	font-size: 1.3em;
 }
 */

@@ -1,7 +1,9 @@
 Tester::Application.routes.draw do
 
-
   root to: "static_pages#home"
+
+  get "/contact" => "contact#new"
+  post "/contact" => "contact#create"
 
   resources :sessions, only: [:new, :create, :destroy] do
     collection do
