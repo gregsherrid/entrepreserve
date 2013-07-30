@@ -334,8 +334,15 @@ EOM
         puts "## Drop this into a file in db/migrate ##"
         puts migration
       end
+#This causes "warning: else without rescue is useless"
+#Else isn't lined up with if, I think
+#    end
+#  else
+#    find_indexes
+#  end
+    else
+      find_indexes
     end
-  else
-    find_indexes
   end
+#Replaced with above
 end

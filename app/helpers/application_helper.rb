@@ -1,4 +1,5 @@
 module ApplicationHelper
+	include BootstrapHelper
 
 	def full_title( page_title )
 		base_title = "Base Title"

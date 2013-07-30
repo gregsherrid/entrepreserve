@@ -31,7 +31,14 @@
 
 	<% unless errors.empty? %>
 		<div id="errors">
-			<h3>Errors</h3>
+			<% if errors.length == 1 %>
+				<h3>An error has occured!</h3>
+			<% else %>
+				<h3>
+					<%= errors.length %>
+					errors have occured!
+				</h3>
+			<% end %>
 
 			<ul>
 				<% errors.each do |error| %>

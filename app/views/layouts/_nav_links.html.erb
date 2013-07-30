@@ -1,0 +1,23 @@
+<li><%= link_to "Home", root_path %></li>
+
+<li class="dropdown">
+	<%= dropdown_link "About" %>
+
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+ 		<li><%= link_to "Our Mission", "#" %></li>
+		<li><%= link_to "About Us", "#" %></li>
+		<li><%= link_to "FAQ", "#" %></li>
+	</ul>
+</li>
+
+<li class="dropdown">
+	<%= dropdown_link "Products" %>
+
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+ 		<li><%= link_to "Downloads", "#" %></li>
+		<li><%= link_to "Purchase Kits", "#" %></li>
+	</ul>
+</li>
+
+<li><%= link_to "Contact", '#' %></li>
+<%= render 'layouts/login' %>

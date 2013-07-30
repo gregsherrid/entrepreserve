@@ -15,6 +15,8 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'unicorn'
 
+gem 'bootstrap-sass', '2.3.2.0'
+
 group :doc do
   gem 'sdoc', require: false
 end
