@@ -1,2 +1,18 @@
-<h1>Trees#edit</h1>
-<p>Find me in app/views/trees/edit.html.erb</p>
+<% provide( :title, @tree.title ) %>
+
+<section>
+	<h1><%= @tree.title %></h1>
+
+	<div class="row-fluid">
+
+		<section class="span7">
+		</section>
+
+		<section class="span5 well" id="infoBox">
+			<h2>Branches</h2>
+			<ul id="branchEditList"></ul>
+		</section>
+
+	</div>
+
+</section>

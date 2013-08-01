@@ -19,4 +19,10 @@ FactoryGirl.define do
 
 		association :owner, factory: :user
 	end
+
+	factory :node do
+		sequence(:text) { |n| "Node#{n}" }
+		tree nil
+		parent nil
+	end
 end

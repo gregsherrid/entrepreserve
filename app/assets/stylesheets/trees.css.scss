@@ -1,3 +1,12 @@
-// Place all the styles related to the trees controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ul#branchEditList {
+
+	input.node {
+		margin: 0;
+		padding: 3px 3px;
+	}
+
+	span.node, li > * {
+		display: inline-block;
+		padding: 4px 0;
+	}
+}

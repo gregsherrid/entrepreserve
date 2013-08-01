@@ -26,6 +26,23 @@ describe "TreePages" do
 		end
 	end
 
+	describe "| Tree pages" do
+		let!(:user1) { FactoryGirl.create(:user) }
+		let!(:tree1) { FactoryGirl.create(:tree, owner: user1 ) }
+		let!(:user2) { FactoryGirl.create(:user) }
+		let!(:tree2) { FactoryGirl.create(:tree, owner: user2 ) }
+
+		before { sign_in user1 }
+
+		it "| Buttons on show pages" do
+			visit tree_path( tree1 )
+			should have_selector( "a#editTree" )
+
+			visit tree_path( tree2 )
+			should_not have_selector( "a#editTree" )
+		end
+	end
+
 	describe "| Tree lists" do
 		let!(:user1) { FactoryGirl.create(:user) }
 		let!(:tree1) { FactoryGirl.create(:tree, owner: user1 ) }

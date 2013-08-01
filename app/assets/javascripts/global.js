@@ -5,4 +5,8 @@ function onLoad() {
 	$("div#javascriptWarning").remove();
 
 	$('[rel=tooltip]').tooltip();
+
+	if ( gon.runEditBranch ) {
+		branchSetup();
+	}
 }

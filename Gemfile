@@ -17,6 +17,8 @@ gem 'unicorn'
 
 gem 'bootstrap-sass', '2.3.2.0'
 
+gem 'gon'
+
 group :doc do
   gem 'sdoc', require: false
 end

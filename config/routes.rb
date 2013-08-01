@@ -24,6 +24,7 @@ Tester::Application.routes.draw do
   get '/signup' => "users#new"
 
   resources :trees
+  resources :nodes
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

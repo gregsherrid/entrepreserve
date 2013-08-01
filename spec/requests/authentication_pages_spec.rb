@@ -63,8 +63,9 @@ describe "AuthenticationPages" do
 			user_is_signed_in = !c_user.nil?
 			can_view 		user1,				user_is_signed_in
 			can_view 		user2,				user_is_signed_in
-			can_create 		new_tree_path,		user_is_signed_in
+			can_view 		new_tree_path,		user_is_signed_in
 			can_create 		trees_path,			user_is_signed_in
+			can_create 		nodes_path,			user_is_signed_in
 
 			#is this particular user only
 			user_is_user = c_user == user1

@@ -3,6 +3,15 @@ class TreesController < ApplicationController
     prepend_before_action :require_tree,
         except: [:new, :create, :index]
 
+    prepend_before_action :signed_in_user,
+        only: [:new, :create ]
+
+    before_action :is_current_owner,
+        only: [ :edit, :update ]
+
+    before_action :is_admin,
+        only: [ :destroy ]
+
     def new
         @tree = Tree.new
     end
@@ -18,6 +27,10 @@ class TreesController < ApplicationController
     end
 
     def edit
+        gon.runEditBranch = true
+        gon.nodes         = @tree.nodes.index_by(&:id)
+        gon.rootId        = @tree.root.id
+        gon.updatePath    = nodes_path
     end
 
     def update
@@ -43,7 +56,7 @@ class TreesController < ApplicationController
         end
 
         def is_current_owner
-            auth_redirect unless @tree.owner == current_user
+            auth_redirect unless current_user?( @tree.owner )
         end
 
 
